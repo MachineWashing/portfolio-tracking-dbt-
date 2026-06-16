@@ -42,7 +42,7 @@ sources:
             description: The cost we paid attributable to the secuities we hold in the portfolio at ABC Bank at the Report Date.
             tests:
               - not_null
-          - name: POSITION_VALUE
+          - name: POSIITON_VALUE
             description: The value of the secuities we hold in the portfolio at ABC Bank acording to market quotation on the Report Date.
             tests:
               - not_null
