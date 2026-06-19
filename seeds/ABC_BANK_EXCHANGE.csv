@@ -1,0 +1,5 @@
+EXCHANGE_CODE,EXCHANGE_NAME,COUNTRY,CITY,TRADING_HOURS,TIMEZONE
+NASDAQ,National Association of Securities Dealers Automated Quotations,US,New York,09:30-16:00,EST
+NYSE,New York Stock Exchange,US,New York,09:30-16:00,EST
+TSE,Tokyo Stock Exchange,JP,Tokyo,09:00-15:00,JST
+LSE,London Stock Exchange,UK,London,08:00-16:30,GMT
