@@ -1,7 +1,7 @@
 {{config(materialized='ephemeral')}}
 
 WITH
-src_data as (
+src_data AS (
     SELECT
       ACCOUNTID         as ACCOUNT_CODE     -- TEXT
     , SYMBOL            as SECURITY_CODE    -- TEXT
@@ -15,7 +15,7 @@ src_data as (
     , 'SOURCE_DATA.ABC_BANK_POSITION' AS RECORD_SOURCE
 FROM {{ source('abc_bank', 'ABC_BANK_POSITION') }}
 ),
-hashed as (
+hashed AS (
   SELECT
       concat_ws('|', ACCOUNT_CODE, SECURITY_CODE) as POSITION_HKEY
     , concat_ws('|', ACCOUNT_CODE, SECURITY_CODE,
