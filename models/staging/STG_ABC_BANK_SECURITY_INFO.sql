@@ -13,7 +13,7 @@ src_data as (
 
          , 'SEED.ABC_Bank_SECURITY_INFO' as RECORD_SOURCE
 
-    FROM {{ source('seeds', 'ABC_Bank_SECURITY_INFO') }}
+    FROM {{ source('seeds', 'ABC_BANK_SECURITY_INFO') }}
  ),
 
 default_record as (
@@ -31,7 +31,7 @@ default_record as (
 with_default_record as(
     SELECT * FROM src_data
     UNION ALL
-    SELECT * FROM default_record)
+    SELECT * FROM default_record
 ),
 
 hashed as (
