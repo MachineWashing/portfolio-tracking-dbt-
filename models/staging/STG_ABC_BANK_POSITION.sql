@@ -16,15 +16,20 @@ src_data AS (
     , 'SOURCE_DATA.ABC_BANK_POSITION' AS RECORD_SOURCE
 FROM {{ source('abc_bank', 'ABC_BANK_POSITION') }}
 ),
-hashed AS (
-  SELECT
-      concat_ws('|', ACCOUNT_CODE, SECURITY_CODE) as POSITION_HKEY
-    , concat_ws('|', ACCOUNT_CODE, SECURITY_CODE,
-        SECURITY_NAME, EXCHANGE_CODE, REPORT_DATE,
-        QUANTITY, COST_BASE, POSITION_VALUE, CURRENCY_CODE )
-        as POSITION_HDIFF
-    , *
-    , '{{ run_started_at }}' AS LOAD_TS_UTC
-  FROM src_data
+hashed as (
+    SELECT
+      {{ dbt_utils.surrogate_key([
+             'ACCOUNT_CODE', 'SECURITY_CODE'])
+      }} as POSITION_HKEY
+    , {{ dbt_utils.surrogate_key([
+             'ACCOUNT_CODE', 'SECURITY_CODE',
+             'SECURITY_NAME', 'EXCHANGE_CODE', 'REPORT_DATE',
+             'QUANTITY', 'COST_BASE', 'POSITION_VALUE',
+             'CURRENCY_CODE' ])
+      }} as POSITION_HDIFF
+      , *
+      , '{{ run_started_at }}' as LOAD_TS_UTC
+    FROM src_data
+
 )
 SELECT * FROM hashed
