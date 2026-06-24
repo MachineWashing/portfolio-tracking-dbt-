@@ -10,7 +10,18 @@ sources:
     tables:
       - name: ABC_BANK_POSITION
         description: The landing table holding the data imported from the CSV extracted by ABC Bank.
+
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                - ACCOUNTID
+                - SYMBOL
         columns:
+          - name: CONCAT_WS('-', ACCOUNTID, SYMBOL)
+            tests:
+              - not_null
+              - unique
+          
           - name: ACCOUNTID
             description: The code for the account at the ABC Bank.
             tests:
@@ -50,3 +61,6 @@ sources:
             description: The currency for the monetary amounts of the position.
             tests:
               - not_null
+      
+    
+          
