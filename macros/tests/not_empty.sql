@@ -3,8 +3,8 @@ WITH
 validation_errors as (
     SELECT {{column_name}}
     FROM {{ model }}
-    WHEN LEN ({{column_name}}) = 0
+    WHERE LEN({{column_name}}) = 0
 )
-SSELECT * FROM validation_errors
+SELECT * FROM validation_errors
 
 {%- endtest %}
